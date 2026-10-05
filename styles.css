@@ -6,7 +6,6 @@
 }
 
 :root {
-  /* Tone màu Deep Winter: Xám than chì & Đỏ rượu */
   --color-bg: #1a1a1a; 
   --color-text: #e2e8f0;
   --color-accent: #722F37; 
@@ -68,23 +67,22 @@ a { color: inherit; }
   display: grid;
   gap: 2rem;
   align-items: center;
-  padding-block: 3rem;
+  padding-block: 1rem; 
 }
 
-/* Font chữ tự động co giãn theo màn hình */
 .hero h1 {
   font-size: clamp(2rem, 5vw + 1rem, 3.5rem);
   line-height: 1.2;
+  margin-bottom: 1rem;
 }
 
-/* Nếu màn hình lớn hơn 48rem, chia bố cục 2 phần chữ - 1 phần hình */
+
 @media (min-width: 48rem) {
   .hero { 
     grid-template-columns: 2fr 1fr; 
   }
 }
 
-/* Định dạng ảnh chân dung */
 .hero img {
   width: 300px;
   height: 300px;
@@ -94,46 +92,92 @@ a { color: inherit; }
   margin: auto;
   transition: all 0.25s;
 }
- .hero img:hover{
-    transform: scale(0.95);
- }
+
+.hero img:hover{
+  transform: scale(0.95);
+}
 
 /* =========================================
-   5. KHU VỰC DỰ ÁN (PROJECTS)
+   5. KHU VỰC DỰ ÁN & NÚT LỌC TAG
    ========================================= */
+.projects-section {
+  padding-block: 1rem;
+}
+#projects h2, #contact h2 {
+  font-family: var(--font);
+  font-size: 1.25rem;        
+  font-weight: 700;        
+  background-color: var(--color-accent);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+  transition: all 0.25s;
+}
+
+.button:hover, #projects h2:hover, #contact h2:hover {
+ background-color: #5a252b; 
+  transform: translateY(-2px);        
+}
+
+/* Khay chứa các nút bấm tự động */
+#filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Kiểu dáng từng nút bấm tag */
+#filters button {
+  background-color: #2a2a2a;
+  color: var(--color-text);
+  border: 1px solid #64748b;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font: inherit;
+  transition: all 0.25s ease;
+}
+
+#filters button:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+/* Lưới hiển thị danh sách thẻ dự án */
 .projects {
   display: grid;
-  /* Tự động chia cột linh hoạt: thẻ tối thiểu 250px, tối đa tự giãn đều */
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
-  margin-top: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .card {
-  /* Tạo nền xám sáng hơn nền web một chút để thẻ nổi lên */
   background-color: #2a2a2a; 
   padding: 1.5rem;
   border-radius: 8px;
-  /* Nhấn nhá đường viền dọc màu đỏ rượu bên trái thẻ */
   border-left: 4px solid var(--color-accent);
-  /* Tạo độ mượt khi di chuột vào */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hiệu ứng nổi thẻ lên khi đưa chuột vào */
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Xóa margin mặc định của tiêu đề trong thẻ cho gọn */
 .card h3 {
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
 
 /* =========================================
-   6. KHU VỰC FORM LIÊN HỆ (Cấu trúc Flexbox của khóa học + Màu Deep Winter)
+   6. FORM LIÊN HỆ
    ========================================= */
 .field {
   display: flex;
@@ -143,59 +187,59 @@ a { color: inherit; }
 }
 
 input, textarea, button {
-  font: inherit; /* Đồng bộ font chữ hệ thống */
+  font: inherit;
 }
 
 input, textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #64748b; /* Viền xám ánh xanh theo khóa học */
+  border: 1px solid #64748b;
   border-radius: 0.5rem;
-  
-  /* Lớp sơn giữ lại tone tối của riêng em */
   background-color: #2a2a2a; 
   color: var(--color-text);
 }
 
-/* Hiệu ứng khi nhấp chuột vào ô nhập liệu sẽ sáng viền đỏ rượu */
 input:focus, textarea:focus {
   outline: none;
   border-color: var(--color-accent);
 }
 
-/* Ô nhập lời nhắn cho phép kéo giãn chiều dọc */
 textarea {
   min-height: 120px;
   resize: vertical;
 }
 
 /* =========================================
-   7. NÚT BẤM (BUTTON) & HIỆU ỨNG TƯƠNG TÁC
+   7. NÚT BẤM (BUTTON)
    ========================================= */
 .button {
-  display: inline-block;
-  padding: 0.75rem 1.25rem;
-  border: 0;
-  border-radius: 0.5rem;
+  font-family: var(--font);
+  font-size: 1.25rem;        
+  font-weight: 700;         
+  background-color: var(--color-accent);
   color: #ffffff;
-  background-color: var(--color-accent); /* Tự động lấy màu đỏ rượu */
   text-decoration: none;
-  cursor: pointer;
-  font-weight: 700;
-  
-  /* Tạo độ mượt khi chuyển đổi màu sắc và vị trí */
-  transition: background-color 0.3s ease, transform 0.2s ease; 
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 1rem;
+  margin-bottom: 1.25rem; 
 }
 
-/* Hiệu ứng khi rê chuột: Nút nẩy nhẹ và chìm sang tone đỏ rượu trầm hơn */
 .button:hover {
   background-color: #5a252b; 
   transform: translateY(-2px);
 }
 
-/* Hiệu ứng trợ năng: Bo viền đỏ khi điều hướng bằng phím Tab */
 :focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 3px;
 }
 
+/* =========================================
+   8. DARK MODE 
+   ========================================= */
+:root.dark {
+  --color-bg: #141416;      
+  --color-text: #e4e4e7;     
+}

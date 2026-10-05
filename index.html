@@ -8,9 +8,10 @@
 </head>
 
 <body>
-    <!-- Thêm class container vào header -->
+
+<!-- Header -->
     <header class="site-header container">
-        <a class="logo" href="#">Thanh Ngọc</a>
+        <a class="logo" href="#">Trần Thanh Ngọc</a>
         <nav class="site-nav">
             <ul>
                 <li><a href="#about">Giới thiệu</a></li>
@@ -18,64 +19,79 @@
                 <li><a href="#contact">Liên hệ</a></li>
             </ul>
         </nav>
+        <!-- Nút chuyển đổi Dark/Light Mode -->
+        <button id="theme-toggle" class="button" style="padding: 0.4rem 0.8rem; font-size: 0.9rem;">Giao diện</button>
     </header>
-
-    <!-- Thêm class container vào main -->
+    <!-- Main -->
     <main class="container">
         
-        <!-- Thêm class hero và bọc nội dung chữ vào 1 thẻ div -->
+              <!-- Hero Section -->
         <section id="about" class="hero">
             <div>
-                <h1>Xin chào, mình là Trần Thanh Ngọc</h1>
-                <p>Sinh viên ngành Vật lý Tin học, yêu thích công nghệ, IoT và lập trình.</p>
-                <a class="button" href="#contact">Liên hệ</a>
+                <h1>HI, HAVE A NICE DAY</h1>
+                <a class="button" href="#projects">Giới thiệu</a>
+                
+                <p style="margin-top: 1rem;">
+                    Physics Student | HCM VNUHCM - University of Science.
+                </p>
+<p style="margin-top: 1rem;">
+                    📍 TP. Hồ Chí Minh | 
+                    📞  0566932962 |
+                    ✉️  ngocthanhtran1502@gmail.com
+                </p>
+                <p 
+                    <br>
+                    🔗 <a href="https://www.linkedin.com" target="_blank" style="color: var(--color-text); text-decoration: underline;">Thanh Ngoc Tran</a>
+                </p>
             </div>
             <img src="me.jpg" alt="Ảnh chân dung Thanh Ngọc">
         </section>
 
-        <!-- Các dự án cũ được giữ nguyên -->
+        <!--DỰ ÁN -->
         <section id="projects">
-  <h2>Dự án</h2>
-  <div class="projects">
-    <article class="card">
-      <h3>Mô phỏng con lắc</h3>
-      <p>Python + Matplotlib, 2025.</p>
-    </article>
-    <article class="card">
-      <h3>Đo nhiệt độ bằng Arduino</h3>
-      <p>C++ và cảm biến DS18B20.</p>
-    </article>
-    <article class="card">
-      <h3>Hệ thống giám sát kho cảng (IoT)</h3>
-      <p>ESP32, Cảm biến siêu âm & Dashboard ThingsBoard.</p>
-    </article>
-  </div>
-</section>
+            <h2>Dự án</h2>
+            
+            <!-- Vùng chứa các nút bấm lọc Tag -->
+            <div id="filters"></div>
+            
+            <!-- Vùng chứa danh sách các dự án sẽ được in ra -->
+            <ul id="project-list"></ul>
+            
+            <!-- Khuôn đúc dự án -->
+            <template id="project-card">
+              <li class="card">
+                <h3></h3>
+                <p class="tags"></p>
+              </li>
+            </template>
+        </section>
 
-
-        <!-- Form liên hệ cũ được giữ nguyên -->
+        <!-- Form liên hệ -->
         <section id="contact">
-    <h2>Liên hệ</h2>
-    <form>
-        <div class="field">
-            <label for="name">Họ tên</label>
-            <input id="name" name="name" required>
-        </div>
-        <div class="field">
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" required>
-        </div>
-        <div class="field">
-            <label for="msg">Lời nhắn</label>
-            <textarea id="msg" name="msg"></textarea>
-        </div>
-        <button class="button">Gửi</button>
-    </form>
-</section>
+            <h2>Liên hệ</h2>
+            <form>
+                <div class="field">
+                    <label for="name">Họ tên</label>
+                    <input id="name" name="name" required>
+                </div>
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" required>
+                </div>
+                <div class="field">
+                    <label for="msg">Lời nhắn</label>
+                    <textarea id="msg" name="msg"></textarea>
+                </div>
+                <button class="button">Gửi</button>
+            </form>
+        </section>
         
     </main>
 
-    <!-- Thêm class container vào footer -->
+    <!-- Footer -->
     <footer class="container">© 2026 Trần Thanh Ngọc</footer>
+
+    <!-- JavaScript Module -->
+    <script type="module" src="app.js"></script>
 </body>
 </html>
