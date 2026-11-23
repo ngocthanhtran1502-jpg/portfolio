@@ -1,11 +1,12 @@
 // 1. Nhập nguyên liệu
 import { projects } from './data.js';
+import { loadRepos } from './repos.js'; // Nhập thêm hàm gọi GitHub API
 
-// 2. Chỉ điểm dụng cụ
+// 2. Chỉ điểm dụng cụ (Dự án)
 const ul = document.querySelector('#project-list');
 const tpl = document.querySelector('#project-card');
 
-// 3. Hàm đúc dự án (Đã làm ở bước 3)
+// 3. Hàm đúc dự án
 function render(list) {
     ul.textContent = ''; 
     for (const p of list) {
@@ -15,41 +16,73 @@ function render(list) {
         ul.append(li);
     }
 }
-render(projects); // Gọi hàm để hiện 4 dự án lên
+render(projects); // Gọi hàm để hiện các dự án lên
 
 // ==========================================
-//  TẠO NÚT LỌC TỰ ĐỘNG
+//  TẠO NÚT LỌC TỰ ĐỘNG (Dự án)
 // ==========================================
-
-// Lọc ra các tag duy nhất, không trùng lặp
 const tags = [...new Set(
   projects.flatMap((p) => p.tags),
 )];
 
-// Tìm cái đĩa trống #filters
 const bar = document.querySelector('#filters');
 
-// Đúc nút bấm cho chữ 'all' và từng tag
 for (const tag of ['all', ...tags]) {
   const b = document.createElement('button');
   b.textContent = tag;
-  b.dataset.tag = tag; // Gắn nhãn chìm để lát sau xài
-  bar.append(b); // Ném nút vào đĩa
+  b.dataset.tag = tag; 
+  bar.append(b); 
 }
-// Lắng nghe sự kiện click trên toàn bộ khay chứa nút
-bar.addEventListener('click', (e) => {
-  // Lấy cái nhãn chìm của nút bị bấm
-  const tag = e.target.dataset.tag;
-  if (!tag) return; // Bấm trượt ra ngoài thì bỏ qua
 
-  // Sàng lọc dữ liệu
+bar.addEventListener('click', (e) => {
+  const tag = e.target.dataset.tag;
+  if (!tag) return; 
+
   const filtered = tag === 'all'
     ? projects
     : projects.filter((p) => p.tags.includes(tag));
 
-  // Ném dữ liệu mới vào cỗ máy để vẽ lại
   render(filtered);
 });
+
+// ==========================================
+//  WIDGET REPO GITHUB (Chặng 2)
+// ==========================================
+const state = document.querySelector('#repos-state');
+const list = document.querySelector('#repo-list');
+
+function repoCard(r) {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = r.url;
+    a.target = '_blank'; // Mở tab mới khi bấm vào repo
+    a.textContent = r.name;
+    
+    const p = document.createElement('p');
+    p.textContent = `⭐ ${r.stars} · ${r.desc}`;
+    
+    li.append(a, p);
+    return li;
+}
+
+async function showRepos(user) {
+    state.textContent = 'Đang tải...';
+    list.textContent = '';
+    try {
+        const repos = await loadRepos(user);
+        state.textContent = repos.length ? '' : 'Chưa có repo công khai.';
+        repos.forEach((r) => list.append(repoCard(r)));
+    } catch (err) {
+        state.textContent = 'Không tải được: ' + err.message;
+        const again = document.createElement('button');
+        again.textContent = 'Thử lại';
+        again.onclick = () => showRepos(user);
+        state.append(again);
+    }
+}
+
+// THAY BẰNG TÊN TÀI KHOẢN GITHUB 
+showRepos('ngocthanhtran1502-jpg');
 
 // ==========================================
 //  TÍNH NĂNG DARK / LIGHT MODE
@@ -57,7 +90,6 @@ bar.addEventListener('click', (e) => {
 const themeToggleBtn = document.querySelector('#theme-toggle');
 const rootElement = document.documentElement;
 
-// 1. Kiểm tra xem trước đó người dùng đã chọn mode nào chưa
 if (localStorage.getItem('theme') === 'dark') {
     rootElement.classList.add('dark');
 }
